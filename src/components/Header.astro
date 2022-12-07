@@ -1,0 +1,22 @@
+<script>
+  const nav = document.querySelector("header nav") as HTMLElement;
+  window.onscroll = function () {
+    const pos = Math.min(1, window.pageYOffset / window.innerHeight);
+    nav.style.top = `${10 + (1 - pos) * 50}px`;
+  };
+</script>
+<header>
+  <nav>
+    <a id="about" href="#">About</a>
+    <a id="reel" href="#">Reel</a>
+    <a id="contact" href="#">Contact</a>
+  </nav>
+</header>
+<style>
+  nav {
+    position: fixed;
+    top: 10px;
+    display: flex;
+    justify-content: space-between;
+  }
+</style>

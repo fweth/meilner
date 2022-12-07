@@ -1,0 +1,31 @@
+---
+import Header from "../components/Header.astro";
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Milos Website" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>Milos Website</title>
+  </head>
+  <body>
+    <Header />
+    <main>
+      <slot />
+    </main>
+  </body>
+</html>
+<style is:global>
+  @font-face {
+    font-family: "Simplon";
+    src: local("Simplon"), url("SimplonNorm-Regular-WebS.woff2") format("woff2"),
+      url("SimplonNorm-Regular-WebS.woff") format("woff");
+  }
+  body {
+    font-family: "Simplon";
+  }
+</style>
