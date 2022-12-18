@@ -1,22 +1,44 @@
 <script>
   const nav = document.querySelector("header nav") as HTMLElement;
-  window.onscroll = function () {
-    const pos = Math.min(1, window.pageYOffset / window.innerHeight);
-    nav.style.top = `${10 + (1 - pos) * 50}px`;
-  };
+  function setHeaderPos(){
+    const pos = ((x) => (x < 1 ? Math.sin((Math.PI * x) / 2) : 1))(
+        window.pageYOffset / window.innerHeight
+      );
+      nav.style.height = `${pos * 48 + (1 - pos) * window.innerHeight}px`
+      // nav.style.top = `${10 + (1 - pos) * window.innerHeight / 2}px`;
+      nav.style.width = `${60 + 30 * pos}%`;
+  }
+  (window.onresize = window.onscroll = setHeaderPos)();
 </script>
 <header>
   <nav>
-    <a id="about" href="#">About</a>
-    <a id="reel" href="#">Reel</a>
-    <a id="contact" href="#">Contact</a>
+    <a class="left" href="/#about">About</a>
+    <a class="center" href="/#reel">Reel</a>
+    <a class="right" href="/#contact">Contact</a>
   </nav>
 </header>
 <style>
   nav {
     position: fixed;
-    top: 10px;
+    inset: 0 0 auto;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    justify-content: center;
+    /* height: 0; */
+    margin: auto;
+    text-transform: uppercase;
+    letter-spacing: 12px;
+  }
+  a {
+    position: absolute;
+  }
+  a.left {
+    align-self: start;
+  }
+  a.center {
+    align-self: center;
+  }
+  a.right {
+    align-self: end;
   }
 </style>
