@@ -3,12 +3,10 @@ import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout>
-  <section>
-    <!-- <iframe title="vimeo-player" src="https://player.vimeo.com/video/670168289?h=ec2e1f4cdf"></iframe> -->
-    <video src="http://test.camillorakos.com/WEBSITE_16.9.mp4" autoplay loop muted
-    ></video>
+  <section style="display:flex">
+    <video src="/WEBSITE_16.9.mp4" autoplay loop muted></video>
   </section>
-  <section id="about">
+  <section id="about" style="display:none">
     <article>
       <p>
         I am a cinematographer focusing on documentary, fictional and
@@ -25,11 +23,12 @@ import Layout from "../layouts/Layout.astro";
       </p>
     </article>
   </section>
-  <section id="reel">
-    <iframe src="https://player.vimeo.com/video/670168289?h=ec2e1f4cdf"
-    ></iframe>
+  <section id="reel" style="display:none">
+    <iframe
+      src="https://player.vimeo.com/video/670168289?h=ec2e1f4cdf"
+      allow="autoplay"></iframe>
   </section>
-  <section id="contact">
+  <section id="contact" style="display:none">
     <article>
       <a href="tel:+436643921524">+43 664 392 15 24</a>
       <a href="mailto:mail@camillorakos.com">mail@camillorakos.com</a>
@@ -43,14 +42,13 @@ import Layout from "../layouts/Layout.astro";
 </Layout>
 <style>
   section {
-    position: relative;
+    position: fixed;
     width: 100vw;
     height: 100vh;
-    display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    scroll-snap-align: start;
+    transition: transform 400ms;
   }
   article {
     width: 512px;
