@@ -3,10 +3,7 @@ import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout>
-  <section style="display:flex">
-    <video src="/WEBSITE_16.9.mp4" autoplay loop muted></video>
-  </section>
-  <section id="about" style="display:none">
+  <section style="display: none;">
     <article>
       <p>
         I am a cinematographer focusing on documentary, fictional and
@@ -23,12 +20,12 @@ import Layout from "../layouts/Layout.astro";
       </p>
     </article>
   </section>
-  <section id="reel" style="display:none">
+  <section class="reel" style="display: none;">
     <iframe
       src="https://player.vimeo.com/video/670168289?h=ec2e1f4cdf"
       allow="autoplay"></iframe>
   </section>
-  <section id="contact" style="display:none">
+  <section style="display: none;">
     <article>
       <a href="tel:+436643921524">+43 664 392 15 24</a>
       <a href="mailto:mail@camillorakos.com">mail@camillorakos.com</a>
@@ -47,8 +44,12 @@ import Layout from "../layouts/Layout.astro";
     height: 100vh;
     align-items: center;
     justify-content: center;
+    padding: 40px 0;
     overflow: hidden;
     transition: transform 400ms;
+  }
+  section.reel {
+    background: black;
   }
   article {
     width: 512px;
@@ -61,14 +62,9 @@ import Layout from "../layouts/Layout.astro";
     width: 100vw;
     height: 100vh;
   }
-  video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: -1;
-  }
   iframe {
-    width: 100%;
+    width: 90%;
     height: 100%;
+    margin: auto;
   }
 </style>
