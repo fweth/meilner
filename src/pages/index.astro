@@ -1,47 +1,78 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
 ---
 
 <Layout>
-  <section>
-    <!-- <iframe title="vimeo-player" src="https://player.vimeo.com/video/670168289?h=ec2e1f4cdf"></iframe> -->
-    <video src="http://test.camillorakos.com/WEBSITE_16.9.mp4" autoplay loop muted
-    ></video>
-  </section>
-  <section id="about">
-    <article>
-      <p>
-        I am a cinematographer focusing on documentary, fictional and
-        advertorial projects that investigate socially relevant topics.
-      </p>
-      <p>
-        Shaping light and composing images is a powerful tool to emotionally
-        catch the audience, making them reflect on issues and phenomena they're
-        possibly unaware of.
-      </p>
-      <p>
-        Besides entertainment, i see our responsibility as filmmakers to use
-        that power for making a positive impact, regardless of what extent.
-      </p>
-    </article>
-  </section>
-  <section id="reel">
-    <iframe src="https://player.vimeo.com/video/670168289?h=ec2e1f4cdf"
-    ></iframe>
-  </section>
-  <section id="contact">
-    <article>
-      <a href="tel:+436643921524">+43 664 392 15 24</a>
-      <a href="mailto:mail@camillorakos.com">mail@camillorakos.com</a>
-      <p>
-        Camillo Rakoš
-        <br />
-        Vienna, Austria
-      </p>
-    </article>
-  </section>
+  <Header />
+  <main>
+    <section class="intro">
+      <video
+        class="landscape"
+        src="/WEBSITE_16.9.webm"
+        autoplay
+        loop
+        muted
+        playsinline
+      >
+        <source src="/WEBSITE_16.9.webm" type="video/webm" />
+        <source src="/WEBSITE_16.9.mp4" type="video/mp4" />
+      </video>
+      <video class="portrait" autoplay loop muted playsinline>
+        <source src="/WEBSITE_9.16.webm" type="video/webm" />
+        <source src="/WEBSITE_9.16.mp4" type="video/mp4" />
+      </video>
+    </section>
+    <section class="about">
+      <article>
+        <p>
+          I am an evolving cinematographer based in Vienna, Austria, focusing on
+          documentaries, music videos, fictional and advertorial projects.
+        </p>
+        <p>
+          Shaping light and creating images is a powerful tool for emotionally
+          catching the audience, drawing their attention onto topics they're
+          possibly unaware of.
+        </p>
+        <p>
+          As a filmmaker, I aim to use that power to create new perspectives,
+          trying to make a positive impact on the world we live in, regardless
+          of what extent.
+        </p>
+      </article>
+      <article class="clients">
+        <p>Selected Clients & Collaborators:</p>
+        <p>
+          ARTE, Concrete - The Graffiti Agency,
+          <br />
+          Present Perfect Productions, SPÖ,
+          <br />
+          Vienna Tourism Board, Zementwerk Kirchdorf a.d. Krems
+        </p>
+      </article>
+    </section>
+    <section class="reel">
+      <iframe
+        src="https://player.vimeo.com/video/670168289?h=ec2e1f4cdf"
+        allow="fullscreen"></iframe>
+    </section>
+    <section class="contact">
+      <article>
+        <a href="tel:+436643921524">+43 664 392 15 24</a>
+        <a href="mailto:mail@camillorakos.com">mail@camillorakos.com</a>
+        <p>
+          Camillo Rakoš
+          <br />
+          <span class="pin"></span>Vienna, Austria
+        </p>
+      </article>
+      <article class="clients">
+        <a href="/dsgvo">Datenschutzerklärung</a>
+      </article>
+    </section>
+  </main>
 </Layout>
-<style>
+<style is:global>
   section {
     position: relative;
     width: 100vw;
@@ -49,19 +80,29 @@ import Layout from "../layouts/Layout.astro";
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 40px;
+    padding: 48px;
     overflow: hidden;
     scroll-snap-align: start;
+  }
+  section.intro {
+    padding: 0;
+  }
+  .clients {
+    position: absolute;
+    align-self: flex-end;
+    font-size: 14px;
+  }
+  video.portrait {
+    display: none;
   }
   article {
     width: 512px;
     text-align: center;
   }
-  p {
-    margin-top: 20px;
-  }
   iframe {
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
   }
   video {
     width: 100%;
@@ -72,5 +113,43 @@ import Layout from "../layouts/Layout.astro";
   iframe {
     width: 100%;
     height: 100%;
+  }
+  .pin {
+    position: relative;
+    display: inline-block;
+    width: 1em;
+  }
+  .pin::before {
+      content: "📍";
+      position: absolute;
+      right: 0.1em;
+      bottom: -0.2em;
+    }
+  @media (max-width: 800px) {
+    video.landscape {
+      display: none;
+    }
+    video.portrait {
+      display: block;
+    }
+    article {
+      width: 80%;
+    }
+    .clients {
+      font-size: 12pt;
+    }
+    section {
+      flex-direction: column;
+      padding: 0px;
+    }
+    .clients {
+      position: static;
+      align-self: auto;
+    }
+  }
+  @media (max-width: 600px) {
+    .clients {
+      font-size: 10px;
+    }
   }
 </style>

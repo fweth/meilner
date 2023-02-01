@@ -1,28 +1,22 @@
----
-import Header from "../components/Header.astro";
----
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="Milos Website" />
     <meta name="generator" content={Astro.generator} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.png" />
     <title>Milos Website</title>
   </head>
   <body>
-    <Header />
-    <main>
-      <slot />
-    </main>
+    <slot />
   </body>
 </html>
 <style is:global>
   @font-face {
     font-family: "Simplon";
-    src: local("Simplon"), url("/SimplonNorm-Regular-WebS.woff2") format("woff2"),
+    src: local("Simplon"),
+      url("/SimplonNorm-Regular-WebS.woff2") format("woff2"),
       url("/SimplonNorm-Regular-WebS.woff") format("woff");
   }
   * {
@@ -31,17 +25,43 @@ import Header from "../components/Header.astro";
     box-sizing: border-box;
   }
   html {
-    scroll-behavior: smooth;
     scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
   }
   body {
     background: black;
     color: white;
+    -webkit-text-fill-color: white;
     font-family: "Simplon";
     font-size: 24px;
+    line-height: 1.2;
   }
-  a {
+  a,
+  button {
     display: block;
     cursor: pointer;
+  }
+  a {
+    text-decoration: underline;
+  }
+  h1 {
+    text-align: center;
+    margin-top: 2.4em;
+  }
+  h2 {
+    margin: 2.4em 0 1.2em;
+  }
+  p {
+    margin-top: 1.2em;
+  }
+  @media (max-width: 1000px) {
+    body {
+      font-size: 20px;
+    }
+  }
+  @media (max-width: 600px) {
+    body {
+      font-size: 14px;
+    }
   }
 </style>

@@ -1,44 +1,152 @@
 <script>
-  const nav = document.querySelector("header nav") as HTMLElement;
-  function setHeaderPos(){
-    const pos = ((x) => (x < 1 ? Math.sin((Math.PI * x) / 2) : 1))(
-        window.pageYOffset / window.innerHeight
-      );
-      nav.style.height = `${pos * 48 + (1 - pos) * window.innerHeight}px`
-      // nav.style.top = `${10 + (1 - pos) * window.innerHeight / 2}px`;
-      nav.style.width = `${60 + 30 * pos}%`;
+  const header = document.querySelector("header") as HTMLElement;
+  const main = document.querySelector("main") as HTMLElement;
+  const nav = header.querySelector("nav") as HTMLElement;
+  function setHeaderPos(e?: Event) {
+    const os = window.pageYOffset / window.innerHeight;
+    if (window.innerWidth <= 800) {
+      if (os > 0.5) {
+        header.classList.remove("large");
+        header.classList.add("minimized");
+      } else {
+        header.classList.remove("minimized");
+        header.classList.add("large");
+      }
+      nav.removeAttribute("style");
+    } else {
+      const pos = os < 1 ? Math.sin((Math.PI * os) / 2) : 1;
+      nav.removeAttribute("style");
+      nav.style.height = `${pos * 48 + (1 - pos) * window.innerHeight}px`;
+      nav.style.width = `${70 + 30 * pos}%`;
+    }
   }
   (window.onresize = window.onscroll = setHeaderPos)();
+  const burger = header.querySelector(".burger") as HTMLElement;
+  burger.onclick = function () {
+    header.classList.remove("minimized");
+  };
+  const html = document.querySelector("html") as HTMLElement;
+  let timeout: number;
+  for (let id of ["about", "reel", "contact"]) {
+    const btn = nav.querySelector(`button.${id}`) as HTMLElement;
+    const sec = main.querySelector(`section.${id}`) as HTMLElement;
+    btn.onclick = function () {
+      html.style.scrollSnapType = "none";
+      sec.scrollIntoView({ behavior: "smooth", block: "center" });
+      window.clearTimeout(timeout);
+      timeout = window.setTimeout(function () {
+        html.style.scrollSnapType = "y mandatory";
+      }, 1000);
+    };
+  }
+
+  // nav.querySelectorAll("button").forEach(function (el) {
+  //   el.onclick = function () {
+  //     header.classList.remove("large");
+  //     header.classList.add("minimized");
+  //   };
+  // });
 </script>
 <header>
-  <nav>
-    <a class="left" href="/#about">About</a>
-    <a class="center" href="/#reel">Reel</a>
-    <a class="right" href="/#contact">Contact</a>
+  <button class="burger">
+    <div></div>
+    <div></div>
+    <div></div>
+  </button>
+  <nav style="display: none;">
+    <button class="about">About</button>
+    <button class="reel">Reel</button>
+    <button class="contact">Contact</button>
   </nav>
 </header>
-<style>
+<style is:global>
   nav {
     position: fixed;
-    inset: 0 0 auto;
+    right: 0;
+    left: 0;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    align-items: center;
+    justify-content: space-around;
     margin: auto;
     text-transform: uppercase;
     letter-spacing: 12px;
     z-index: 5;
+    user-select: none;
   }
-  a {
+  .burger {
+    display: none;
+  }
+  .banner {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  button.about, button.contact, button.reel {
+    padding: 0 48px;
+  }
+  button.about {
     position: absolute;
+    align-self: flex-start;
   }
-  a.left {
-    align-self: start;
+  button.contact {
+    position: absolute;
+    align-self: flex-end;
   }
-  a.center {
-    align-self: center;
-  }
-  a.right {
-    align-self: end;
+  @media (max-width: 800px) {
+    nav {
+      /* display: none; */
+      height: 126px;
+      justify-content: space-around;
+      transition: height 400ms, top 400ms;
+    }
+    header.large nav {
+      display: flex;
+      height: 100vh;
+    }
+    header.minimized nav {
+      display: flex;
+      top: -60px;
+      height: 40px;
+    }
+    .burger {
+      position: fixed;
+      top: 0px;
+      right: 0;
+      left: 0;
+      width: 50px;
+      height: 126px;
+      display: flex;
+      margin: auto;
+      flex-direction: column;
+      justify-content: space-around;
+      z-index: 50;
+      opacity: 0;
+      cursor: pointer;
+      pointer-events: none;
+      transition: height 400ms, opacity 400ms, top 400ms;
+    }
+    header.minimized .burger {
+      top: 30px;
+      height: 50px;
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .burger div {
+      height: 2px;
+      background: white;
+    }
+    button.about,
+    button.contact {
+      position: static;
+      align-self: auto;
+    }
+    .banner {
+      display: flex;
+    }
   }
 </style>
