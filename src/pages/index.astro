@@ -58,6 +58,7 @@ import Header from "../components/Header.astro";
     </section>
     <section class="contact">
       <article>
+        <img src="me.jpeg"/>
         <a href="tel:+436643921524">+43 664 392 15 24</a>
         <a href="mailto:mail@camillorakos.com">mail@camillorakos.com</a>
         <p>
@@ -66,7 +67,7 @@ import Header from "../components/Header.astro";
           <span class="pin"></span>Vienna, Austria
         </p>
       </article>
-      <article class="clients">
+      <article class="dsgvo">
         <a href="/dsgvo">Datenschutzerklärung</a>
       </article>
     </section>
@@ -93,6 +94,11 @@ import Header from "../components/Header.astro";
     align-self: flex-end;
     font-size: 14px;
   }
+  .dsgvo {
+    position: absolute;
+    font-size: 14px;
+    bottom: 20px;
+  }
   video.portrait {
     display: none;
   }
@@ -113,6 +119,10 @@ import Header from "../components/Header.astro";
   iframe {
     width: 100%;
     height: 100%;
+  }
+  .contact img {
+    width: 200px;
+    margin-bottom: 30px;
   }
   .pin {
     position: relative;
