@@ -9,7 +9,6 @@ import Header from "../components/Header.astro";
     <section class="intro">
       <video
         class="landscape"
-        src="/WEBSITE_16.9.webm"
         autoplay
         loop
         muted
@@ -58,7 +57,7 @@ import Header from "../components/Header.astro";
     </section>
     <section class="contact">
       <article>
-        <img src="me.jpeg"/>
+        <img src="me.jpeg" />
         <a href="tel:+436643921524">+43 664 392 15 24</a>
         <a href="mailto:mail@camillorakos.com">mail@camillorakos.com</a>
         <p>
@@ -121,7 +120,7 @@ import Header from "../components/Header.astro";
     height: 100%;
   }
   .contact img {
-    width: 200px;
+    width: 180px;
     margin-bottom: 30px;
   }
   .pin {
@@ -130,11 +129,11 @@ import Header from "../components/Header.astro";
     width: 1em;
   }
   .pin::before {
-      content: "📍";
-      position: absolute;
-      right: 0.1em;
-      bottom: -0.2em;
-    }
+    content: "📍";
+    position: absolute;
+    right: 0.1em;
+    bottom: -0.2em;
+  }
   @media (max-width: 800px) {
     video.landscape {
       display: none;
@@ -155,6 +154,9 @@ import Header from "../components/Header.astro";
     .clients {
       position: static;
       align-self: auto;
+    }
+    .contact img {
+      width: 160px;
     }
   }
   @media (max-width: 600px) {
