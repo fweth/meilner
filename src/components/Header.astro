@@ -2,6 +2,26 @@
   const header = document.querySelector("header") as HTMLElement;
   const main = document.querySelector("main") as HTMLElement;
   const nav = header.querySelector("nav") as HTMLElement;
+  const btns = nav.querySelectorAll("button");
+  window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+  window.setTimeout(function () {
+    btns[1].classList.remove("hidden");
+  });
+  window.setTimeout(function () {
+    btns[1].classList.add("hidden");
+  }, 800);
+  window.setTimeout(function () {
+    btns[1].classList.remove("hidden");
+  }, 1600);
+  window.setTimeout(function () {
+    btns[1].classList.add("hidden");
+  }, 2400);
+  window.setTimeout(function () {
+    btns[1].textContent = "Reel";
+    for (let btn of btns) {
+      btn.classList.remove("hidden");
+    }
+  }, 3200);
   function setHeaderPos(e?: Event) {
     const os = window.pageYOffset / window.innerHeight;
     if (window.innerWidth <= 800) {
@@ -39,13 +59,6 @@
       }, 1000);
     };
   }
-
-  // nav.querySelectorAll("button").forEach(function (el) {
-  //   el.onclick = function () {
-  //     header.classList.remove("large");
-  //     header.classList.add("minimized");
-  //   };
-  // });
 </script>
 <header>
   <button class="burger">
@@ -54,9 +67,9 @@
     <div></div>
   </button>
   <nav style="display: none;">
-    <button class="about">About</button>
-    <button class="reel">Reel</button>
-    <button class="contact">Contact</button>
+    <button class="about hidden">About</button>
+    <button class="reel hidden">Loading...</button>
+    <button class="contact hidden">Contact</button>
   </nav>
 </header>
 <style is:global>
@@ -74,6 +87,12 @@
     z-index: 5;
     user-select: none;
   }
+  nav button {
+    transition: opacity 400ms;
+  }
+  nav button.hidden {
+    opacity: 0;
+  }
   .burger {
     display: none;
   }
@@ -86,7 +105,9 @@
     justify-content: center;
     text-align: center;
   }
-  button.about, button.contact, button.reel {
+  button.about,
+  button.contact,
+  button.reel {
     padding: 0 48px;
   }
   button.about {
@@ -102,7 +123,7 @@
       /* display: none; */
       height: 126px;
       justify-content: space-around;
-      transition: height 400ms, top 400ms;
+      transition: height 800ms, top 400ms;
     }
     header.large nav {
       display: flex;
