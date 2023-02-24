@@ -2,26 +2,23 @@
   const header = document.querySelector("header") as HTMLElement;
   const main = document.querySelector("main") as HTMLElement;
   const nav = header.querySelector("nav") as HTMLElement;
-  const btns = nav.querySelectorAll("button");
+  const loader = header.querySelector(".loader") as HTMLElement;
   window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   window.setTimeout(function () {
-    btns[1].classList.remove("hidden");
+    loader.style.opacity = "1";
+    loader.style.transform = "rotate(360deg)";
   });
   window.setTimeout(function () {
-    btns[1].classList.add("hidden");
-  }, 800);
+    loader.style.transform = "rotate(720deg)";
+  }, 1400);
   window.setTimeout(function () {
-    btns[1].classList.remove("hidden");
-  }, 1600);
+    loader.style.transform = "rotate(1080deg)";
+    loader.style.opacity = "0";
+  }, 2800);
   window.setTimeout(function () {
-    btns[1].classList.add("hidden");
-  }, 2400);
-  window.setTimeout(function () {
-    btns[1].textContent = "Reel";
-    for (let btn of btns) {
-      btn.classList.remove("hidden");
-    }
-  }, 3200);
+    nav.classList.remove("loading");
+  }, 3400);
+  
   function setHeaderPos(e?: Event) {
     const os = window.pageYOffset / window.innerHeight;
     if (window.innerWidth <= 800) {
@@ -32,7 +29,7 @@
         header.classList.remove("minimized");
         header.classList.add("large");
       }
-      nav.removeAttribute("style");
+      // nav.removeAttribute("style");
     } else {
       const pos = os < 1 ? Math.sin((Math.PI * os) / 2) : 1;
       nav.removeAttribute("style");
@@ -60,19 +57,31 @@
     };
   }
 </script>
-<header>
+<header class="large">
   <button class="burger">
     <div></div>
     <div></div>
     <div></div>
   </button>
-  <nav style="display: none;">
-    <button class="about hidden">About</button>
-    <button class="reel hidden">Loading...</button>
-    <button class="contact hidden">Contact</button>
+  <nav class="loading">
+    <div class="loader"/>
+    <button class="about">About</button>
+    <button class="reel">Reel</button>
+    <button class="contact">Contact</button>
   </nav>
 </header>
 <style is:global>
+  .loader {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    margin: auto;
+    border-radius: 999px;
+    border: solid 2px;
+    border-color: white white transparent transparent;
+    opacity: 0;
+    transition: opacity 1600ms, transform 1600ms;
+  }
   nav {
     position: fixed;
     right: 0;
@@ -86,12 +95,7 @@
     letter-spacing: 12px;
     z-index: 5;
     user-select: none;
-  }
-  nav button {
-    transition: opacity 400ms;
-  }
-  nav button.hidden {
-    opacity: 0;
+    /* opacity: 0; */
   }
   .burger {
     display: none;
@@ -105,10 +109,12 @@
     justify-content: center;
     text-align: center;
   }
-  button.about,
-  button.contact,
-  button.reel {
+  nav button {
     padding: 0 48px;
+    transition: opacity 1600ms;
+  }
+  nav.loading button {
+    opacity: 0;
   }
   button.about {
     position: absolute;
@@ -123,7 +129,7 @@
       /* display: none; */
       height: 126px;
       justify-content: space-around;
-      transition: height 800ms, top 400ms;
+      transition: height 800ms, opacity 1600ms, top 400ms;
     }
     header.large nav {
       display: flex;
